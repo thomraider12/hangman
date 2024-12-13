@@ -29,6 +29,7 @@ var word = [
     ["Chocolate", "Doce que todos adoram."]
 ];
 
+
 // Game keyboard
 var tastatur = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
 
@@ -50,8 +51,9 @@ window.onload = function() {
             resY = wH / 2
         }
         eL.style.bottom = resY + "px"
-    }, false)
+     }, false)
     createTastur()
+    setupKeyboardListener()
 }
 
 // Start game
@@ -244,4 +246,17 @@ function hintExit() {
 // Get HTML ID element by name
 function gId(a) {
     return document.getElementById(a)
+}
+
+// Listen for physical keyboard input
+function setupKeyboardListener() {
+    document.addEventListener("keydown", function(event) {
+        const key = event.key.toUpperCase();
+        if (tastatur.includes(key)) {
+            const virtualKey = Array.from(document.getElementsByClassName("b")).find(b => b.innerText === key);
+            if (virtualKey) {
+                bTas(virtualKey);
+            }
+        }
+    });
 }
